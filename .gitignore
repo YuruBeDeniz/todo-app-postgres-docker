@@ -1,0 +1,89 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+env/
+ENV/
+.vscode/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment variables
+.env
+
+# Cache files
+*.log
+*.cache
+*.lock
+*.migrations
+*.sqlite3
+
+# pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# MyPy cache
+.mypy_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Database files
+*.db
+*.sql
+*.sqlite
+
+# macOS specific files
+.DS_Store
+
+# Byte-compiled files
+*.py[cod]
+__pycache__/
+
+# Environment variables
+.env
+
+# Python virtual environments
+venv/
+env/
+
+# Logs
+*.log
+
+# Alembic migration cache (optional)
+alembic/versions/*.pyc
+
+# OS-specific files
+.DS_Store
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+
+# Node.js dependencies (if applicable for your Angular frontend)
+node_modules/
+
+# Database files (if applicable)
+*.sqlite3
+
+# Pytest cache
+.cache/
