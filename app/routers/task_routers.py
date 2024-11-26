@@ -27,10 +27,12 @@ async def get_tasks(db: AsyncSession = Depends(get_db)):
 # Get one task
 @router.get("task-details/{id}", response_model=TaskResponse)
 async def get_task(id: int, db: AsyncSession = Depends(get_db)):
-    db_item = await db.execute(select(Task).where(Task.id == id))
+    result = await db.execute(select(Task).where(Task.id == id))
+    db_item = result.scalar_one_or_none()  # Extract the single result or None
     if db_item is None:
-        raise HTTPException(status_code=404, detail="Item not found")
+        raise HTTPException(status_code=404, detail="Task not found")
     return db_item
+
 
 # Update a task
 @router.put("/{id}", response_model=TaskResponse)
