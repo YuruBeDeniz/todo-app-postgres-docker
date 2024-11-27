@@ -15,10 +15,12 @@ async def test_connection():
     engine = create_async_engine(DATABASE_URL, echo=True)
     try:
         async with engine.begin() as conn:
-            await conn.execute("SELECT 1")
-        return {"status": "Connection successful!"}
+            result = await conn.execute("SELECT 1")  # Explicitly execute the query
+            data = result.fetchone()  # Fetch the result
+        return {"status": "Connection successful!", "data": data}
     except Exception as e:
         return {"status": "Connection failed!", "error": str(e)}
+
 
 
 app.add_middleware(
