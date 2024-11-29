@@ -29,6 +29,7 @@ services:
       - dem
 
   backend:
+    image: yurudeniz/todo-app-backend:latest
     build:
       context: .
     container_name: backend_container

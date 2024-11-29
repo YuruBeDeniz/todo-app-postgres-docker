@@ -81,6 +81,17 @@ apt update && apt install -y postgresql-client
 psql -h postgres -U postgres -d todo_app
 alembic upgrade head
 
+# docker hub
+tag the images:
+(no need to push postgres:latest to Docker Hub because it’s an official image that others can pull directly)
+docker tag todo-app-backend-python-backend yurubedeniz/todo-app-backend:latest
+
+docker login
+
+docker push yurubedeniz/todo-app-backend:latest
+
+Update docker-compose.yml to use the image
+
 ### materials
 
 https://medium.com/@kevinkoech265/dockerizing-fastapi-and-postgresql-effortless-containerization-a-step-by-step-guide-68b962c3e7eb
