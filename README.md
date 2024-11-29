@@ -74,6 +74,12 @@ docker network create app-network
 docker network connect app-network todo-postgres
 
 
+## verify db connectivity
+docker exec -it backend_container bash
+
+apt update && apt install -y postgresql-client
+psql -h postgres -U postgres -d todo_app
+alembic upgrade head
 
 ### materials
 

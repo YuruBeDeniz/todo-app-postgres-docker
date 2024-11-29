@@ -4,14 +4,47 @@ services:
     container_name: postgres_container
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: todo_app
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dem
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "5000:80"
+    depends_on:
+      - postgres
+    networks:
+      - dem
+
+  backend:
+    build:
+      context: .
+    container_name: backend_container
+    restart: always
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:mysecretpassword@postgres:5432/todo_app
+    ports:
+      - "8000:80"
+    depends_on:
+      - postgres
+    networks:
+      - dem
+
+networks:
+  dem:
+    external: true
 
 volumes:
   postgres_data: {}
-
