@@ -11,11 +11,17 @@ router = APIRouter()
 # Create a task
 @router.post("/", response_model=TaskResponse)
 async def create_task(task: TaskSchema, db: AsyncSession = Depends(get_db)):
-    new_task = Task(title=task.title, completed=task.completed)
-    db.add(new_task)
-    await db.commit()
-    await db.refresh(new_task)
-    return new_task
+    try:
+        new_task = Task(title=task.title, completed=task.completed)
+        db.add(new_task)
+        await db.commit()  # Ensure this happens
+        await db.refresh(new_task)
+        return new_task
+    except Exception as e:
+        print(f"Error during task creation: {e}")
+        await db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # Get all tasks
 @router.get("/", response_model=List[TaskResponse])
